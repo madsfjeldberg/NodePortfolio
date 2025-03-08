@@ -21,13 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Get all sections with IDs
   const sections = mainContent.querySelectorAll("section[id]");
-  if (sections.length === 0) {
-    // If no sections with IDs are found, try to find headings directly
-    generateTocFromHeadings(mainContent, tocContainer);
-  } else {
-    // If sections with IDs are found, use them for the TOC
-    generateTocFromSections(sections, tocContainer);
-  }
+
+  // Generate TOC from sections
+  generateTocFromSections(sections, tocContainer);
 
   // Get all TOC items after generation
   const tocItems = document.querySelectorAll(".toc-item");
@@ -36,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to determine which section is currently in view
   function highlightTocItem() {
     // Get current scroll position
-    const scrollY = window.pageYOffset;
+    const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
 
@@ -198,59 +194,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function generateTocFromSections(sections, tocContainer) {
   // Create TOC list
   const tocList = createTocList(sections);
-
-  // Add title to TOC container
-  if (tocContainer) {
-    tocContainer.innerHTML = '<h4 class="toc-title">On This Page</h4>';
-    tocContainer.appendChild(tocList);
-  }
+  tocContainer.appendChild(tocList);
 }
 
-/**
- * Generate TOC from headings
- * @param {HTMLElement} mainContent - The main content element
- * @param {HTMLElement} tocContainer - The TOC container
- */
-function generateTocFromHeadings(mainContent, tocContainer) {
-  // Find all headings (h2, h3, h4)
-  const headings = mainContent.querySelectorAll("h2, h3, h4");
-  if (headings.length === 0) return;
-
-  // Create sections for headings that don't have a section parent
-  headings.forEach((heading, index) => {
-    // Check if heading is already in a section
-    const parentSection = heading.closest("section");
-    if (!parentSection) {
-      // Create a section for this heading
-      const section = document.createElement("section");
-      const id = heading.id || `section-${index}`;
-      section.id = id;
-      heading.id = id;
-
-      // Wrap the heading in the section
-      heading.parentNode.insertBefore(section, heading);
-      section.appendChild(heading);
-
-      // Move all siblings until the next heading into this section
-      let nextSibling = section.nextSibling;
-      while (
-        nextSibling &&
-        !["H2", "H3", "H4"].includes(nextSibling.nodeName)
-      ) {
-        const current = nextSibling;
-        nextSibling = nextSibling.nextSibling;
-        section.appendChild(current);
-      }
-    } else if (!heading.id) {
-      // If heading is in a section but doesn't have an ID, use the section's ID
-      heading.id = parentSection.id;
-    }
-  });
-
-  // Get all sections with IDs after creating them
-  const sections = mainContent.querySelectorAll("section[id]");
-  generateTocFromSections(sections, tocContainer);
-}
 
 /**
  * Create a TOC list from sections
