@@ -22,6 +22,7 @@
     </style>
   </head>
   <body class="bg-dark-bg text-dark-text min-h-screen">
+    <main>
     <div class="container mx-auto px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Main content -->
@@ -30,157 +31,161 @@
             class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
           >
             <section id="introduction">
-              <h2 class="text-2xl font-semibold text-dark-text mb-4">
-                JavaScript Fundamentals
-              </h2>
+              <h2 class="text-2xl font-semibold text-dark-text mb-4">JavaScript Basics</h2>
               <p class="text-dark-text-secondary mb-4">
-                JavaScript is a high-level, interpreted programming language
-                that conforms to the ECMAScript specification. It is a language
-                that is also characterized as dynamic, weakly typed,
-                prototype-based and multi-paradigm.
+                JavaScript is a weakly typed programming language, and is one of the most popular languages in the world.
+                For a long time, it was used only in the browser, but with Node.js, it's now possible to use it on the server side as well.
+                It's very versatile, and can be used for scripts, apps, games, and more.
               </p>
-            </section>
+              </section>
 
-            <section id="key-features">
-              <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
-                Key Features
-              </h3>
-              <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
-                <li>First-class functions</li>
-                <li>Prototype-based object orientation</li>
-                <li>Asynchronous programming with Promises and async/await</li>
-                <li>Closures</li>
-                <li>Event-driven programming</li>
-              </ul>
+              <section id="types">
+                <hr class="my-6 border-t border-dark-border mt-8" />
+                <h3 class="text-xl font-semibold text-dark-text mb-4">Types</h3>
+                <p class="text-dark-text-secondary mb-4">
+                  there are 7 primitive types in JavaScript:
+                  <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+                    <li><code class="inline">number</code> - any number, javascript has no distinction between integers and floats</li>
+                    <li><code class="inline">string</code> - any sequence of characters, enclosed in quotes</li>
+                    <li><code class="inline">boolean</code> - true or false</li>
+                    <li><code class="inline">null</code> - an empty value</li>
+                    <li><code class="inline">undefined</code> - a value that is not defined</li>
+                    <li><code class="inline">symbol</code> - a unique and immutable data type that's often used as an identifier for object properties</li>
+                    <li><code class="inline">bigint</code> - a numeric data type that can represent integers larger than 2^53</li>
+                    <li><code class="inline">object</code> - a collection of properties</li>
+                  </ul>
 
-              <div
-                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
-              >
+                  <p class="text-dark-text-secondary mb-4">
+                    Being weakly typed, JavaScript will automatically try to convert types when necessary:
+                  </p>
+                  <pre class="language-javascript">
+let number = 10;
+let string = "10";
+// here the number is converted to a string and concatenated
+number + string; // "1010"
+                  </pre>
+                  <p class="text-dark-text-secondary mb-4">
+                    This is called Type Coercion. Because of this, there are two types of equality operators:
+                    <br>
+                    <code class="inline">==</code> - checks for value equality, without considering type
+                    <br>
+                    <code class="inline">===</code> - checks for value equality and type
+                  </p>
+                  <pre class="language-javascript">
+console.log(10 == "10"); // true
+console.log(10 === "10"); // false
+                  </pre>
+                  <p class="text-dark-text-secondary mb-4">
+                    As a general rule, you should use the strict equality operator <code class="inline">===</code> to compare values,
+                    <br>
+                    as it's more strict and less prone to bugs.
+
+                  </p>
+                  
+                  
+                </section>
+
+              <section id="variables">
+                <hr class="my-6 border-t border-dark-border mt-8" />
+                <h3 class="text-xl font-semibold text-dark-text mb-4">Variables</h3>
+                <p class="text-dark-text-secondary mb-4">
+                  in JavaScript, there are three ways to declare variables:
+                </p>
+                <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+                  <li><code class="inline">let</code></li>
+                  <li><code class="inline">const</code></li>
+                  <li><code class="inline">var</code></li>
+                </ul>
+                <p class="text-dark-text-secondary mb-4">
+                  If you don't expect a variable to change, use <code class="inline">const</code>.
+                  </p>
+                  <pre class="language-javascript">
+const x = 10;
+x = 20; // This will throw an error
+
+// however, this is allowed:
+const myList = [1, 2, 3];
+myList.push(4); // This is allowed
+myList.pop(); // This is also fine
+
+myList = [1, 2, 3, 4, 5]; // This will throw an error
+                  </pre>
+                  <p class="text-dark-text-secondary mb-4">
+                  When making objects with <code class="inline">const</code>, you can still change the properties of the object.
+                  <br>
+                  But you can't reassign the variable to a different object.
+                  <br>
+                  <br>
+                  If you expect a variable to change, use <code class="inline">let</code>.
+                  <br>
+                  Note that you can even reassign the variable to a different type:
+                  <pre class="language-javascript">
+let x = 10;
+x = 20; // This is allowed
+x = "fish"; // This is also allowed
+x = true; // completely fine
+                  </pre>
+                  <p class="text-dark-text-secondary mb-4">
+                    If you want a lot of bugs, use <code class="inline">var</code>.
+                    <br>
+                    There really isn't a reason to use it, and it's not used in modern JavaScript.
+                    The biggest issue with <code class="inline">var</code> is that it's function scoped,
+                    meaning that it's accessible anywhere in the function it's declared in.
+                    <br>
+                    Whereas <code class="inline">let</code> and <code class="inline">const</code> are block scoped,
+                    meaning that they're only accessible within the block they're declared in, giving you more control over their scope.
+                  </p>
+              </section>
+
+              <section id="functions">
+                <hr class="my-6 border-t border-dark-border mt-8" />
+                <h3 class="text-xl font-semibold text-dark-text mb-4">Functions</h3>
+                <p class="text-dark-text-secondary mb-4">
+                  There are two types of functions in JavaScript:
+                </p>
+                <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+                  <li><code class="inline">Arrow functions</code></li>
+                  <li><code class="inline">Regular functions</code></li>
+                </ul>
+                <p class="text-dark-text-secondary mb-4">
+                  Arrow functions are a newer way to write functions, and are more concise.
+                  <br>
+                  They also have a different way of handling the <code class="inline">this</code> keyword.
+                </p>
                 <pre class="language-javascript">
-// Example JavaScript code
-function greet(name) {
-  return `Hello, ${name}!`;
+function myFunction() {
+  console.log("Hello, world!");
 }
 
-console.log(greet('World'));
+const myArrowFunction = () => {
+  console.log("Hello, world!");
+}
+
+myFunction(); // "Hello, world!"
+myArrowFunction(); // "Hello, world!"
                 </pre>
-              </div>
-            </section>
+                <p class="text-dark-text-secondary mb-4">
+                  Regular functions are the older way to write functions, While arrow functions were introduced in ES6.
+                  <br>
+                  Arrow functions were designed to be more concise and easier to read.
+                  <br>
+                  They can also be shortened like this:
+                  <pre class="language-javascript">
+const myArrowFunction = () => console.log("Hello, world!");
+myArrowFunction(); // "Hello, world!"
 
-            <section id="modern-features">
-              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-                Modern JavaScript Features
-              </h3>
-              <p class="text-dark-text-secondary mb-4">
-                ES6 and beyond introduced many powerful features to JavaScript:
-              </p>
-
-              <div
-                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
-              >
-                <pre class="language-javascript">
-// Arrow functions
-const add = (a, b) => a + b;
-
-// Destructuring
-const { name, age } = person;
-const [first, ...rest] = items;
-
-// Template literals
-const message = `Hello, ${name}! You are ${age} years old.`;
-
-// Spread operator
-const newArray = [...oldArray, newItem];
-const newObject = { ...oldObject, newProp: value };
-
-// Async/await
-async function fetchData() {
-  try {
-    const response = await fetch('https://api.example.com/data');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
-                </pre>
-              </div>
-            </section>
-
-            <section id="dom-manipulation">
-              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-                DOM Manipulation
-              </h3>
-              <p class="text-dark-text-secondary mb-4">
-                JavaScript can be used to manipulate the Document Object Model
-                (DOM), allowing for dynamic web pages:
-              </p>
-
-              <div
-                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
-              >
-                <pre class="language-javascript">
-// Selecting elements
-const element = document.getElementById('myElement');
-const elements = document.querySelectorAll('.my-class');
-
-// Modifying content
-element.textContent = 'New text content';
-element.innerHTML = '<strong>HTML content</strong>';
-
-// Changing styles
-element.style.color = 'blue';
-element.classList.add('active');
-element.classList.remove('inactive');
-
-// Event handling
-element.addEventListener('click', function(event) {
-  console.log('Element clicked!', event);
-});
-                </pre>
-              </div>
-            </section>
-
-            <section id="modules">
-              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-                JavaScript Modules
-              </h3>
-              <p class="text-dark-text-secondary mb-4">
-                Modern JavaScript uses modules to organize code into reusable
-                pieces:
-              </p>
-
-              <div
-                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
-              >
-                <pre class="language-javascript">
-// math.js - Exporting functions
-export function add(a, b) {
-  return a + b;
-}
-
-export function subtract(a, b) {
-  return a - b;
-}
-
-// main.js - Importing functions
-import { add, subtract } from './math.js';
-
-console.log(add(5, 3));      // 8
-console.log(subtract(5, 3)); // 2
-
-// Default exports and imports
-export default class User {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-import User from './user.js';
-const user = new User('John');
-                </pre>
-              </div>
-            </section>
+/ And when passing parameters, you can even leave out the parentheses:
+const myArrowFunction = name => console.log(`Hello, ${name}!`);
+myArrowFunction("John"); // "Hello, John!"
+                  </pre>
+                  
+                  
+                  
+                </p>
+                
+              </section>
+              
+              
           </div>
         </div>
 
@@ -193,6 +198,7 @@ const user = new User('John');
       </div>
     </div>
 
+  </main>
     <!-- JavaScript for scrollspy functionality -->
     <script src="/js/scrollspy.js"></script>
   </body>
