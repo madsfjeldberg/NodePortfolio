@@ -817,11 +817,6 @@ video {
   bottom: -2px;
 }
 
-.after\:bottom-\[1000px\]::after {
-  content: var(--tw-content);
-  bottom: 1000px;
-}
-
 .after\:left-0::after {
   content: var(--tw-content);
   left: 0px;

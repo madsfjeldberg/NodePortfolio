@@ -4,7 +4,7 @@ import { processHtmlWithCodeHighlighting } from "./middleware/codeHighlighter.js
 import proxy from "express-http-proxy";
 
 const app = express();
-const PORT = 8081;
+const PORT = 8085;
 
 app.use(express.static(path.resolve("public")));
 app.use('/betterproxy', proxy('https://www.google.com'));
