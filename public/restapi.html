@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodePortfolio | REST API</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      /* Additional styles for Shiki code blocks */
+      .shiki {
+        margin: 0;
+        width: 100%;
+        border-radius: 0.375rem;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <main>
+  <body class="bg-dark-bg text-dark-text min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <div
+        class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+      >
+        <h2 class="text-2xl font-semibold text-dark-text mb-4">
+          What is REST API?
+        </h2>
+        <p class="text-dark-text-secondary mb-4">
+          REST (Representational State Transfer) is an architectural style for
+          designing networked applications. RESTful APIs use HTTP requests to
+          perform CRUD operations (Create, Read, Update, Delete).
+        </p>
+        <p class="text-dark-text">Key principles of REST include:</p>
+        <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+          <li>Stateless client-server communication</li>
+          <li>Cacheable responses</li>
+          <li>Uniform interface</li>
+          <li>Layered system architecture</li>
+        </ul>
+
+        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+          Building a REST API with Express
+        </h3>
+        <p class="text-dark-text-secondary mb-4">
+          Here's an example of a simple REST API built with Express:
+        </p>
+
+        <div class="bg-dark-bg rounded-md mt-4 p-6 border border-dark-border">
+          <pre class="language-javascript">
+// Simple REST API with Express
+import express from 'express';
+const app = express();
+const port = 3000;
+
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// In-memory database
+let users = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+];
+
+// GET all users
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+// GET a specific user
+app.get('/api/users/:id', (req, res) => {
+  const user = users.find(u => u.id === parseInt(req.params.id));
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  res.json(user);
+});
+
+// POST a new user
+app.post('/api/users', (req, res) => {
+  const newUser = {
+    id: users.length + 1,
+    name: req.body.name,
+    email: req.body.email
+  };
+  users.push(newUser);
+  res.status(201).json(newUser);
+});
+
+// PUT (update) a user
+app.put('/api/users/:id', (req, res) => {
+  const user = users.find(u => u.id === parseInt(req.params.id));
+  if (!user) return res.status(404).json({ message: 'User not found' });
+  
+  user.name = req.body.name || user.name;
+  user.email = req.body.email || user.email;
+  
+  res.json(user);
+});
+
+// DELETE a user
+app.delete('/api/users/:id', (req, res) => {
+  const userIndex = users.findIndex(u => u.id === parseInt(req.params.id));
+  if (userIndex === -1) return res.status(404).json({ message: 'User not found' });
+  
+  const deletedUser = users.splice(userIndex, 1)[0];
+  res.json(deletedUser);
+});
+
+app.listen(port, () => {
+  console.log(`REST API server running at http://localhost:${port}`);
+});
+          </pre>
+        </div>
+
+        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+          HTTP Methods in REST
+        </h3>
+        <p class="text-dark-text-secondary mb-4">
+          RESTful APIs use standard HTTP methods to perform different
+          operations:
+        </p>
+        <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+          <li>
+            <strong class="text-dark-text">GET</strong> - Retrieve resources
+          </li>
+          <li>
+            <strong class="text-dark-text">POST</strong> - Create new resources
+          </li>
+          <li>
+            <strong class="text-dark-text">PUT</strong> - Update existing
+            resources
+          </li>
+          <li>
+            <strong class="text-dark-text">DELETE</strong> - Remove resources
+          </li>
+          <li>
+            <strong class="text-dark-text">PATCH</strong> - Partially update
+            resources
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  </main>
+</html>

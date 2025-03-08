@@ -1,0 +1,47 @@
+{
+  "name": "nodeportfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of what i've learned using node",
+  "homepage": "https://github.com/madsfjeldberg/NodePortfolio#readme",
+  "bugs": {
+    "url": "https://github.com/madsfjeldberg/NodePortfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madsfjeldberg/NodePortfolio.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css",
+    "watch:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
+    "dev": "npm run build:css && nodemon --ext js,html,css --watch public --watch app.js --watch middleware --watch utils app.js",
+    "start": "node app.js"
+  },
+  "nodemonConfig": {
+    "ext": "js,html,css",
+    "watch": [
+      "public/**/*",
+      "app.js",
+      "middleware/**/*",
+      "utils/**/*"
+    ],
+    "ignore": [
+      "public/css/styles.css"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.5.3",
+    "shiki": "^3.1.0",
+    "tailwindcss": "^3.3.5"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-http-proxy": "^2.1.1"
+  }
+}

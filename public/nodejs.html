@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NodePortfolio | Node.js</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+      /* Additional styles for Shiki code blocks */
+      .shiki {
+        margin: 0;
+        width: 100%;
+        border-radius: 0.375rem;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <main>
+  <body class="bg-dark-bg text-dark-text min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <div
+        class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+      >
+        <h2 class="text-2xl font-semibold text-dark-text mb-4">
+          About Node.js
+        </h2>
+        <p class="text-dark-text-secondary mb-4">
+          Node.js is an open-source, cross-platform JavaScript runtime
+          environment that executes JavaScript code outside a web browser.
+          Node.js lets developers use JavaScript to write command line tools and
+          for server-side scripting.
+        </p>
+
+        <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
+          Key Features
+        </h3>
+        <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
+          <li>Asynchronous and Event-Driven</li>
+          <li>Single-Threaded but Highly Scalable</li>
+          <li>No Buffering</li>
+          <li>License - Released under the MIT license</li>
+        </ul>
+
+        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
+          <pre class="language-javascript">
+// Example Node.js server
+import http from 'http';
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+
+server.listen(3000, '127.0.0.1', () => {
+  console.log('Server running at http://127.0.0.1:3000/');
+});
+          </pre>
+        </div>
+
+        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+          Working with Files
+        </h3>
+        <p class="text-dark-text-secondary mb-4">
+          Node.js provides powerful APIs for working with the file system:
+        </p>
+
+        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
+          <pre class="language-javascript">
+// Reading and writing files in Node.js
+import fs from 'fs/promises';
+import path from 'path';
+
+async function readAndWriteFile() {
+  try {
+    // Read a file
+    const content = await fs.readFile('input.txt', 'utf-8');
+    
+    // Process the content
+    const processedContent = content.toUpperCase();
+    
+    // Write to a new file
+    await fs.writeFile('output.txt', processedContent);
+    
+    console.log('File processing completed successfully');
+  } catch (error) {
+    console.error('Error processing file:', error);
+  }
+}
+
+readAndWriteFile();
+          </pre>
+        </div>
+      </div>
+    </div>
+  </body>
+  </main>
+</html>
