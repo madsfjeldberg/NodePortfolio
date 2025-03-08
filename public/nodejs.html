@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NodePortfolio | Node.js</title>
+    <title>Node.js | NodePortfolio</title>
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/toc.css" />
     <style>
       /* Additional styles for Shiki code blocks */
       .shiki {
@@ -15,34 +16,41 @@
       }
     </style>
   </head>
-  <main>
   <body class="bg-dark-bg text-dark-text min-h-screen">
     <div class="container mx-auto px-4 py-8">
-      <div
-        class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
-      >
-        <h2 class="text-2xl font-semibold text-dark-text mb-4">
-          About Node.js
-        </h2>
-        <p class="text-dark-text-secondary mb-4">
-          Node.js is an open-source, cross-platform JavaScript runtime
-          environment that executes JavaScript code outside a web browser.
-          Node.js lets developers use JavaScript to write command line tools and
-          for server-side scripting.
-        </p>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Main content -->
+        <div class="lg:col-span-3">
+          <div
+            class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+          >
+            <section id="introduction">
+              <h2 class="text-2xl font-semibold text-dark-text mb-4">
+                About Node.js
+              </h2>
+              <p class="text-dark-text-secondary mb-4">
+                Node.js is an open-source, cross-platform JavaScript runtime
+                environment that executes JavaScript code outside a web browser.
+                Node.js lets developers use JavaScript to write command line
+                tools and for server-side scripting.
+              </p>
+            </section>
 
-        <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
-          Key Features
-        </h3>
-        <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
-          <li>Asynchronous and Event-Driven</li>
-          <li>Single-Threaded but Highly Scalable</li>
-          <li>No Buffering</li>
-          <li>License - Released under the MIT license</li>
-        </ul>
+            <section id="key-features">
+              <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
+                Key Features
+              </h3>
+              <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
+                <li>Asynchronous and Event-Driven</li>
+                <li>Single-Threaded but Highly Scalable</li>
+                <li>No Buffering</li>
+                <li>License - Released under the MIT license</li>
+              </ul>
 
-        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
-          <pre class="language-javascript">
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
 // Example Node.js server
 import http from 'http';
 
@@ -55,18 +63,22 @@ const server = http.createServer((req, res) => {
 server.listen(3000, '127.0.0.1', () => {
   console.log('Server running at http://127.0.0.1:3000/');
 });
-          </pre>
-        </div>
+                </pre>
+              </div>
+            </section>
 
-        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-          Working with Files
-        </h3>
-        <p class="text-dark-text-secondary mb-4">
-          Node.js provides powerful APIs for working with the file system:
-        </p>
+            <section id="file-system">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                Working with Files
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                Node.js provides powerful APIs for working with the file system:
+              </p>
 
-        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
-          <pre class="language-javascript">
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
 // Reading and writing files in Node.js
 import fs from 'fs/promises';
 import path from 'path';
@@ -89,10 +101,79 @@ async function readAndWriteFile() {
 }
 
 readAndWriteFile();
-          </pre>
+                </pre>
+              </div>
+            </section>
+
+            <section id="modules">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                Node.js Modules
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                Node.js has a built-in module system that allows you to organize
+                your code into reusable pieces:
+              </p>
+
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
+// Built-in modules
+import fs from 'fs';
+import path from 'path';
+import http from 'http';
+
+// Third-party modules (installed via npm)
+import express from 'express';
+import lodash from 'lodash';
+
+// Local modules
+import { add, subtract } from './math.js';
+import User from './models/User.js';
+                </pre>
+              </div>
+            </section>
+
+            <section id="npm">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                NPM (Node Package Manager)
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                NPM is the default package manager for Node.js and is used to
+                install, share, and manage dependencies in Node.js projects:
+              </p>
+
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-bash">
+# Initialize a new Node.js project
+npm init -y
+
+# Install a package
+npm install express
+
+# Install a development dependency
+npm install --save-dev nodemon
+
+# Run a script defined in package.json
+npm run dev
+                </pre>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Table of Contents sidebar -->
+        <div class="hidden lg:block">
+          <div class="toc-container">
+            <!-- TOC will be generated automatically by scrollspy.js -->
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- JavaScript for scrollspy functionality -->
+    <script src="/js/scrollspy.js"></script>
   </body>
-  </main>
 </html>

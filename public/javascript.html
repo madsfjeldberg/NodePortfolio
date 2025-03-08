@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NodePortfolio | JavaScript</title>
+    <title>JavaScript | NodePortfolio</title>
     <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/toc.css" />
     <style>
       /* Additional styles for Shiki code blocks */
       .shiki {
@@ -13,55 +14,71 @@
         border-radius: 0.375rem;
         overflow: auto;
       }
+
+      /* Make sure the main content has IDs for scrollspy */
+      section {
+        scroll-margin-top: 2rem;
+      }
     </style>
   </head>
-  <main>
   <body class="bg-dark-bg text-dark-text min-h-screen">
     <div class="container mx-auto px-4 py-8">
-      <div
-        class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
-      >
-        <h2 class="text-2xl font-semibold text-dark-text mb-4">
-          JavaScript Fundamentals
-        </h2>
-        <p class="text-dark-text-secondary mb-4">
-          JavaScript is a high-level, interpreted programming language that
-          conforms to the ECMAScript specification. It is a language that is
-          also characterized as dynamic, weakly typed, prototype-based and
-          multi-paradigm.
-        </p>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Main content -->
+        <div class="lg:col-span-3">
+          <div
+            class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+          >
+            <section id="introduction">
+              <h2 class="text-2xl font-semibold text-dark-text mb-4">
+                JavaScript Fundamentals
+              </h2>
+              <p class="text-dark-text-secondary mb-4">
+                JavaScript is a high-level, interpreted programming language
+                that conforms to the ECMAScript specification. It is a language
+                that is also characterized as dynamic, weakly typed,
+                prototype-based and multi-paradigm.
+              </p>
+            </section>
 
-        <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
-          Key Features
-        </h3>
-        <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
-          <li>First-class functions</li>
-          <li>Prototype-based object orientation</li>
-          <li>Asynchronous programming with Promises and async/await</li>
-          <li>Closures</li>
-          <li>Event-driven programming</li>
-        </ul>
+            <section id="key-features">
+              <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
+                Key Features
+              </h3>
+              <ul class="list-disc pl-6 mb-4 text-dark-text-secondary">
+                <li>First-class functions</li>
+                <li>Prototype-based object orientation</li>
+                <li>Asynchronous programming with Promises and async/await</li>
+                <li>Closures</li>
+                <li>Event-driven programming</li>
+              </ul>
 
-        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
-          <pre class="language-javascript">
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
 // Example JavaScript code
 function greet(name) {
   return `Hello, ${name}!`;
 }
 
 console.log(greet('World'));
-          </pre>
-        </div>
+                </pre>
+              </div>
+            </section>
 
-        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-          Modern JavaScript Features
-        </h3>
-        <p class="text-dark-text-secondary mb-4">
-          ES6 and beyond introduced many powerful features to JavaScript:
-        </p>
+            <section id="modern-features">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                Modern JavaScript Features
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                ES6 and beyond introduced many powerful features to JavaScript:
+              </p>
 
-        <div class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border">
-          <pre class="language-javascript">
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
 // Arrow functions
 const add = (a, b) => a + b;
 
@@ -86,10 +103,97 @@ async function fetchData() {
     console.error('Error fetching data:', error);
   }
 }
-          </pre>
+                </pre>
+              </div>
+            </section>
+
+            <section id="dom-manipulation">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                DOM Manipulation
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                JavaScript can be used to manipulate the Document Object Model
+                (DOM), allowing for dynamic web pages:
+              </p>
+
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
+// Selecting elements
+const element = document.getElementById('myElement');
+const elements = document.querySelectorAll('.my-class');
+
+// Modifying content
+element.textContent = 'New text content';
+element.innerHTML = '<strong>HTML content</strong>';
+
+// Changing styles
+element.style.color = 'blue';
+element.classList.add('active');
+element.classList.remove('inactive');
+
+// Event handling
+element.addEventListener('click', function(event) {
+  console.log('Element clicked!', event);
+});
+                </pre>
+              </div>
+            </section>
+
+            <section id="modules">
+              <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+                JavaScript Modules
+              </h3>
+              <p class="text-dark-text-secondary mb-4">
+                Modern JavaScript uses modules to organize code into reusable
+                pieces:
+              </p>
+
+              <div
+                class="bg-dark-bg p-4 rounded-md mt-4 border border-dark-border"
+              >
+                <pre class="language-javascript">
+// math.js - Exporting functions
+export function add(a, b) {
+  return a + b;
+}
+
+export function subtract(a, b) {
+  return a - b;
+}
+
+// main.js - Importing functions
+import { add, subtract } from './math.js';
+
+console.log(add(5, 3));      // 8
+console.log(subtract(5, 3)); // 2
+
+// Default exports and imports
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+import User from './user.js';
+const user = new User('John');
+                </pre>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <!-- Table of Contents sidebar -->
+        <div class="hidden lg:block">
+          <div class="toc-container">
+            <!-- TOC will be generated automatically by scrollspy.js -->
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- JavaScript for scrollspy functionality -->
+    <script src="/js/scrollspy.js"></script>
   </body>
-  </main>
 </html>

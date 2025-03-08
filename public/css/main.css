@@ -2,6 +2,11 @@ main {
   min-height: 100vh;
 }
 
-code {
-  color: white;
+/* Inline code styling */
+code.inline {
+  background-color: rgba(39, 40, 34, 0.75);
+  padding: 0.1em 0.4em;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 1.2em;
 }
