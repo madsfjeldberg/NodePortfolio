@@ -1,8 +1,8 @@
 import express from "express";
 import path from "path";
-import { processHtmlWithCodeHighlighting } from "./middleware/codeHighlighter.js";
+// import { processHtmlWithCodeHighlighting } from "./middleware/codeHighlighter.js";
 import proxy from "express-http-proxy";
-import ejsHighlighterMiddleware from "./middleware/ejsHighlighter.js";
+import ejsHighlighterMiddleware from "./middleware/ejsCodeHighlighter.js";
 import tocMiddleware from "./middleware/tocMiddleware.js";
 const app = express();
 const PORT = 8085;
@@ -15,38 +15,39 @@ app.set("views", path.resolve("views"));
 
 app.use(ejsHighlighterMiddleware);
 app.use(tocMiddleware);
-// Custom middleware to handle HTML responses with code highlighting
-app.use(async (req, res, next) => {
-  // Store the original sendFile method
-  const originalSendFile = res.sendFile;
 
-  // Override the sendFile method
-  res.sendFile = async function (filePath, options, callback) {
-    // Check if it's an HTML file
-    if (filePath.endsWith(".html")) {
-      try {
-        // Process the HTML file with code highlighting
-        const processedContent = await processHtmlWithCodeHighlighting(
-          filePath
-        );
+// // Custom middleware to handle HTML responses with code highlighting
+// app.use(async (req, res, next) => {
+//   // Store the original sendFile method
+//   const originalSendFile = res.sendFile;
 
-        if (processedContent) {
-          // Send the processed content
-          res.setHeader("Content-Type", "text/html");
-          return res.send(processedContent);
-        }
-      } catch (error) {
-        console.error("Error processing HTML file:", error);
-        // Fall back to the original sendFile method if there's an error
-      }
-    }
+//   // Override the sendFile method
+//   res.sendFile = async function (filePath, options, callback) {
+//     // Check if it's an HTML file
+//     if (filePath.endsWith(".html")) {
+//       try {
+//         // Process the HTML file with code highlighting
+//         const processedContent = await processHtmlWithCodeHighlighting(
+//           filePath
+//         );
 
-    // Call the original sendFile method if not an HTML file or if processing failed
-    return originalSendFile.call(this, filePath, options, callback);
-  };
+//         if (processedContent) {
+//           // Send the processed content
+//           res.setHeader("Content-Type", "text/html");
+//           return res.send(processedContent);
+//         }
+//       } catch (error) {
+//         console.error("Error processing HTML file:", error);
+//         // Fall back to the original sendFile method if there's an error
+//       }
+//     }
 
-  next();
-});
+//     // Call the original sendFile method if not an HTML file or if processing failed
+//     return originalSendFile.call(this, filePath, options, callback);
+//   };
+
+//   next();
+// });
 
 // Helper function to render content within the layout
 app.use((req, res, next) => {
@@ -81,10 +82,6 @@ app.get("/", (req, res) => {
     tocEnabled: false,
   });
 });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.resolve("public", "frontpage", "frontpage.html"));
-// });
 
 app.get("/restapi", (req, res) => {
   res.render("pages/restapi", {

@@ -6,7 +6,7 @@ let highlighter;
 async function initHighlighter() {
   try {
     highlighter = await createHighlighter({
-      themes: ["monokai"],
+      themes: ["github-dark"],
       langs: ["javascript", "html", "css", "typescript", "json", "bash"],
     });
   } catch (error) {
@@ -32,7 +32,7 @@ export async function highlight(code, lang = "javascript") {
   try {
     return highlighter.codeToHtml(code, {
       lang,
-      theme: "monokai",
+      theme: "github-dark",
     });
   } catch (error) {
     console.error("Error highlighting code:", error);

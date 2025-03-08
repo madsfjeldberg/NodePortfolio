@@ -16,8 +16,7 @@
 
 <pre class="language-bash">
 npm install express
-              </pre
->
+</pre>
 
 <p class="text-dark-text-secondary mb-4">
   or by adding it to your
@@ -31,8 +30,7 @@ npm install express
     "express": "^4.21.2"
   }
 }
-              </pre
->
+</pre>
 
 <p class="text-dark-text-secondary mb-4">
   To get started, create an
@@ -59,8 +57,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-              </pre
->
+</pre>
 
 <p class="text-dark-text-secondary mb-4">
   Now you can run the server with the following command:
@@ -68,7 +65,7 @@ app.listen(PORT, () => {
 
 <pre class="language-bash">
 node app.js
-              </pre
+</pre>
 >
 
 <p class="text-dark-text-secondary mb-4">
@@ -110,8 +107,7 @@ app.get('/api/users', (req, res) => {
   const name = req.query.name;
   res.send(`Hello ${name}!`);
 });
-              </pre
-  >
+</pre>
 
   <p class="text-dark-text-secondary mb-4">
     You can also access the URL parameters using the
@@ -131,8 +127,7 @@ app.get('/api/users/:id', (req, res) => {
   const id = req.params.id;
   res.send(`Hello user ${id}!`);
 });
-              </pre
-  >
+</pre>
 </section>
 
 <section id="json-responses">
@@ -152,8 +147,7 @@ app.get('/api/users', (req, res) => {
     { id: 2, name: 'Jane Doe' },
   ]);
 });
-              </pre
-  >
+</pre>
 </section>
 
 <section id="html-pages">
@@ -172,8 +166,7 @@ import path from 'path';
 app.get('/', (req, res) => {
   res.sendFile(path.resolve('public/index.html'));
 });
-              </pre
-  >
+</pre>
 
   <p class="text-dark-text-secondary mb-4">
     this assumes that you have a
@@ -199,8 +192,7 @@ app.get('/proxy', (req, res) => {
     .then(response => response.text())
     .then(data => res.send(data))
 })
-              </pre
-  >
+</pre>
 
   <p class="text-dark-text-secondary mb-4">
     However, this doesn't really work so well. if you try to acces the
@@ -217,8 +209,7 @@ app.get('/proxy', (req, res) => {
 
   <pre class="language-bash">
 npm install express-http-proxy
-              </pre
-  >
+</pre>
 
   <p class="text-dark-text-secondary mb-4">
     Then, we can use it in our app like this:
@@ -228,8 +219,7 @@ npm install express-http-proxy
 import proxy from 'express-http-proxy';
 
 app.use('/betterproxy', proxy('https://www.google.com'));
-              </pre
-  >
+</pre>
 
   <p class="text-dark-text-secondary mb-4">
     Now, if you try to access the
