@@ -1,7 +1,6 @@
 import { highlight } from "../utils/shiki.js";
 import { injectTemplates } from "../utils/templateUtils.js";
 import fs from "fs/promises";
-import path from "path";
 
 /**
  * Middleware to process HTML files and highlight code blocks

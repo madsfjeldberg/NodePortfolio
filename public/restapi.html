@@ -27,95 +27,48 @@
         <p class="text-dark-text-secondary mb-4">
           REST (Representational State Transfer) is an architectural style for
           designing networked applications. RESTful APIs use HTTP requests to
-          perform CRUD operations (Create, Read, Update, Delete).
+          perform CRUD operations (Create, Read, Update, Delete). 
+          <br>
+          It works by allowing clients to send requests to the server, the server processes the request and sends a response back to the client, typically in JSON format.
         </p>
-        <p class="text-dark-text">Key principles of REST include:</p>
+
+        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
+          REST API principles
+        </h3>
+
         <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
-          <li>Stateless client-server communication</li>
-          <li>Cacheable responses</li>
-          <li>Uniform interface</li>
-          <li>Layered system architecture</li>
+          <li>Using the right HTTP method</li>
+          <li>Ordering</li>
+          <li>Naming/mapping to collections</li>
         </ul>
 
-        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-          Building a REST API with Express
-        </h3>
+        <hr class="my-6 border-t border-dark-border mt-8">
+        <h4 class="text-lg font-semibold text-dark-text mt-8 mb-3">
+          The right HTTP method
+        </h4>
+
         <p class="text-dark-text-secondary mb-4">
-          Here's an example of a simple REST API built with Express:
+          The right HTTP method should be used for the right operation.
+          <br>
+          For example, if you want to create a new resource, you should use the POST method.
+          <br>
+          If you want to retrieve a resource, you should use the GET method.
+          <br>
+          If you want to update a resource, you should use the PUT method.
+          <br>
+          And, of course, if you want to delete a resource, you should use the DELETE method.
         </p>
 
-        <div class="bg-dark-bg rounded-md mt-4 p-6 border border-dark-border">
-          <pre class="language-javascript">
-// Simple REST API with Express
-import express from 'express';
-const app = express();
-const port = 3000;
 
-// Middleware to parse JSON bodies
-app.use(express.json());
+        <hr class="my-6 border-t border-dark-border mt-8">
+        <h4 class="text-lg font-semibold text-dark-text mt-8 mb-3">
+          Ordering
+        </h4>
 
-// In-memory database
-let users = [
-  { id: 1, name: 'John Doe', email: 'john@example.com' },
-  { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
-];
-
-// GET all users
-app.get('/api/users', (req, res) => {
-  res.json(users);
-});
-
-// GET a specific user
-app.get('/api/users/:id', (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (!user) return res.status(404).json({ message: 'User not found' });
-  res.json(user);
-});
-
-// POST a new user
-app.post('/api/users', (req, res) => {
-  const newUser = {
-    id: users.length + 1,
-    name: req.body.name,
-    email: req.body.email
-  };
-  users.push(newUser);
-  res.status(201).json(newUser);
-});
-
-// PUT (update) a user
-app.put('/api/users/:id', (req, res) => {
-  const user = users.find(u => u.id === parseInt(req.params.id));
-  if (!user) return res.status(404).json({ message: 'User not found' });
-  
-  user.name = req.body.name || user.name;
-  user.email = req.body.email || user.email;
-  
-  res.json(user);
-});
-
-// DELETE a user
-app.delete('/api/users/:id', (req, res) => {
-  const userIndex = users.findIndex(u => u.id === parseInt(req.params.id));
-  if (userIndex === -1) return res.status(404).json({ message: 'User not found' });
-  
-  const deletedUser = users.splice(userIndex, 1)[0];
-  res.json(deletedUser);
-});
-
-app.listen(port, () => {
-  console.log(`REST API server running at http://localhost:${port}`);
-});
-          </pre>
-        </div>
-
-        <h3 class="text-xl font-semibold text-dark-text mt-8 mb-3">
-          HTTP Methods in REST
-        </h3>
         <p class="text-dark-text-secondary mb-4">
-          RESTful APIs use standard HTTP methods to perform different
-          operations:
+          When designing a REST API, the methods should be in the following order:
         </p>
+
         <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
           <li>
             <strong class="text-dark-text">GET</strong> - Retrieve resources
@@ -124,19 +77,101 @@ app.listen(port, () => {
             <strong class="text-dark-text">POST</strong> - Create new resources
           </li>
           <li>
-            <strong class="text-dark-text">PUT</strong> - Update existing
-            resources
+            <strong class="text-dark-text">PUT</strong> - Update existing resources
           </li>
           <li>
             <strong class="text-dark-text">DELETE</strong> - Remove resources
           </li>
-          <li>
-            <strong class="text-dark-text">PATCH</strong> - Partially update
-            resources
-          </li>
         </ul>
+
+        <p class="text-dark-text-secondary mb-4">
+        This ensures that the API is consistent and easy to understand, which is important when larger teams are collaborating on the same API. 
+        </p>
+
+        <hr class="my-6 border-t border-dark-border mt-8">
+        <h4 class="text-lg font-semibold text-dark-text mt-8 mb-3">
+          Naming/mapping to collections
+        </h4>
+
+        <p class="text-dark-text-secondary mb-4">
+          When naming/mapping to collections, the plural form of the resource should be used.
+          <br>
+          It is also recommended to keep the endpoints short and concise.
+        </p>
+
+        <p class="text-dark-text-secondary mb-4">
+          Good:
+        </p>
+
+        <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+          <li>GET /api/users</li>
+          <li>POST /api/giraffes</li>
+          <li>DELETE /api/wrestlers/1</li>
+        </ul>
+
+        <p class="text-dark-text-secondary mb-4">
+          Bad:
+        </p>
+
+        <ul class="list-disc pl-6 mt-2 mb-4 text-dark-text-secondary">
+          <li>GET /api/all_users</li>
+          <li>GET /api/user</li>
+          <li>POST /api/giraffe</li>
+          <li>DELETE /api/wrestler/1</li>
+        </ul>
+
+        <hr class="my-6 border-t border-dark-border mt-8">
+        <h4 class="text-lg font-semibold text-dark-text mt-8 mb-3">
+          Example - using Express
+        </h4>
+
+        <p class="text-dark-text-secondary mb-4">
+          A very basic example of a REST API using Express.
+          <br>
+          <br>
+          Note that the database functions are not defined in this example, it's just pseudocode to give an idea of how the API works.
+        </p>
+
+        <pre class="language-javascript">
+// GET /api/users
+app.get('/api/users', (req, res) => {
+  let data = database.getUsers();
+  res.json({ data: data });
+});
+
+// POST /api/users
+// it's good practice to add a comment above the function
+// to describe what it does, and add the parameters and return value.
+// this is just an example though.
+/**
+ * @param {Object} req.body - The user data to create.
+ * @param {string} req.body.name - The name of the user.
+ * @param {string} req.body.email - The email of the user.
+ * @returns {Object} The created user.
+ */
+app.post('/api/users', (req, res) => {
+  let data = database.createUser(req.body);
+  res.json({ data: data });
+});
+
+// PUT /api/users/1
+app.put('/api/users/:id', (req, res) => {
+  let data = database.updateUser(req.params.id, req.body);
+  res.json({ data: data });
+});
+
+// DELETE /api/users/1  
+app.delete('/api/users/:id', (req, res) => {
+  let data = database.deleteUser(req.params.id);
+  res.json({ data: data });
+}); 
+</pre>
+
+          
+        </div>
       </div>
     </div>
-  </body>
   </main>
+  </body>
+  
 </html>

@@ -2,15 +2,19 @@
   <div class="container mx-auto px-4 py-4">
     <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="flex items-center mb-4 md:mb-0">
-        <h1 class="text-2xl font-bold text-dark-accent">NodePortfolio</h1>
+        <h1 class="text-2xl font-bold text-dark-accent"><a
+          href="/"
+          class="text-dark-accent hover:text-white font-bold transition-colors"
+        >
+          NodePortfolio
+        </a></h1>
       </div>
-
       <nav>
         <ul class="flex flex-wrap gap-2 md:gap-6">
           <li>
             <a
               href="/"
-              class="text-dark-accent hover:text-white font-medium transition-colors"
+              class="text-dark-accent hover:text-white font-medium transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
             >
               Frontpage
             </a>
@@ -18,7 +22,7 @@
           <li>
             <a
               href="/restapi"
-              class="text-dark-accent hover:text-white font-medium transition-colors"
+              class="text-dark-accent hover:text-white font-medium transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
             >
               REST API
             </a>
@@ -26,7 +30,7 @@
           <li>
             <a
               href="/javascript"
-              class="text-dark-accent hover:text-white font-medium transition-colors"
+              class="text-dark-accent hover:text-white font-medium transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
             >
               JavaScript
             </a>
@@ -34,7 +38,7 @@
           <li>
             <a
               href="/nodejs"
-              class="text-dark-accent hover:text-white font-medium transition-colors"
+              class="text-dark-accent hover:text-white font-medium transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
             >
               Node.js
             </a>
@@ -42,7 +46,7 @@
           <li>
             <a
               href="/express"
-              class="text-dark-accent hover:text-white font-medium transition-colors"
+              class="text-dark-accent hover:text-white font-medium transition-colors relative after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-0.5 after:bg-white after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
             >
               Express
             </a>
@@ -52,6 +56,22 @@
     </div>
   </div>
 </header>
+<script>
+  // Highlight current page in navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a');
+    
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.remove('text-dark-accent');
+        link.classList.add('text-white');
+        link.classList.add('after:scale-x-100');
+        
+      }
+    });
+  });
+</script>
 
 <style>
   /* Global styles for inline code */
