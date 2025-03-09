@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  nodeportfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodeportfolio
+    ports:
+      - "8085:8085"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+networks:
+  default:
+    driver: bridge
