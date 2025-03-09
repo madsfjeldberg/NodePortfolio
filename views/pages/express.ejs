@@ -1,0 +1,247 @@
+<section id="introduction">
+  <h2 class="text-2xl font-semibold text-dark-text mb-4">Express.js</h2>
+  <p class="text-dark-text-secondary mb-4">
+    Express is a back end web application framework for Node.js. It's very
+    popular and easy to use, which makes it a great choice for building web
+    applications and APIs.
+  </p>
+</section>
+
+<p class="text-dark-text-secondary mb-4">
+  Installing it is pretty straightforward.
+</p>
+<p class="text-dark-text-secondary mb-4">
+  You can either install it with the terminal:
+</p>
+
+<pre class="language-bash">
+npm install express
+</pre>
+
+<p class="text-dark-text-secondary mb-4">
+  or by adding it to your
+  <code class="inline">package.json</code> file:
+</p>
+
+<pre class="language-json">
+{
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
+</pre>
+
+<p class="text-dark-text-secondary mb-4">
+  To get started, create an
+  <code class="inline">app.js</code> file, and add the following code:
+</p>
+
+<pre class="language-javascript">
+// app.js
+
+import express from 'express';
+
+// instantiate express as app
+const app = express();
+
+// define a port
+const PORT = 8080;
+
+// define a route
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+// listen to the port
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+</pre>
+
+<p class="text-dark-text-secondary mb-4">
+  Now you can run the server with the following command:
+</p>
+
+<pre class="language-bash">
+node app.js
+</pre>
+>
+
+<p class="text-dark-text-secondary mb-4">
+  This will start the server and listen on port 8080.
+</p>
+
+<p class="text-dark-text-secondary mb-4">
+  You can then access the server at
+  <code class="inline">http://localhost:8080</code>.
+</p>
+
+<section id="url-parameters">
+  <hr class="my-6 border-t border-dark-border mt-8" />
+  <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">
+    Query strings / URL parameters
+  </h3>
+
+  <p class="text-dark-text-secondary mb-4">
+    You can access the query string using
+    <code class="inline">req.query</code>.
+    <br />
+    For example, if you send a request to
+    <code class="inline">http://localhost:8080/api/users?name=John</code>, you
+    can access the name parameter using
+    <code class="inline">req.query.name</code>.
+    <br />
+    <br />
+    However, when using query strings, they are not <i>required</i>, meaning you
+    can still send request to the route without them.
+  </p>
+
+  <pre class="language-javascript">
+// example route
+// you send a request to http://localhost:8080/api/users?name=John
+app.get('/api/users', (req, res) => {
+  // using destructuring
+  const { name } = req.query;
+  // or:
+  const name = req.query.name;
+  res.send(`Hello ${name}!`);
+});
+</pre>
+
+  <p class="text-dark-text-secondary mb-4">
+    You can also access the URL parameters using the
+    <code class="inline">req.params</code> object.
+    <br />
+    URL parameters are required, meaning you need to send a request to the route
+    with the parameters.
+  </p>
+
+  <pre class="language-javascript">
+// example route
+// you send a request to http://localhost:8080/api/users/1
+app.get('/api/users/:id', (req, res) => {
+  // using destructuring
+  const { id } = req.params;
+  // or:
+  const id = req.params.id;
+  res.send(`Hello user ${id}!`);
+});
+</pre>
+</section>
+
+<section id="json-responses">
+  <hr class="my-6 border-t border-dark-border mt-8" />
+  <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">JSON responses</h3>
+
+  <p class="text-dark-text-secondary mb-4">
+    If you want to send a JSON response, you can use the
+    <code class="inline">res.json</code> method.
+  </p>
+
+  <pre class="language-javascript">
+// example api route
+app.get('/api/users', (req, res) => {
+  res.json([
+    { id: 1, name: 'John Doe' },
+    { id: 2, name: 'Jane Doe' },
+  ]);
+});
+</pre>
+</section>
+
+<section id="html-pages">
+  <hr class="my-6 border-t border-dark-border mt-8" />
+  <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">HTML pages</h3>
+
+  <p class="text-dark-text-secondary mb-4">
+    If you want to serve HTML pages, you can use the
+    <code class="inline">res.sendFile</code> method. <br />
+    Remember to import the <code class="inline">path</code> module.
+  </p>
+
+  <pre class="language-javascript">
+import path from 'path';
+
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve('public/index.html'));
+});
+</pre>
+
+  <p class="text-dark-text-secondary mb-4">
+    this assumes that you have a
+    <code class="inline">public</code> folder in the root of your project,
+    <br />
+    and that you have an <code class="inline">index.html</code> file in it.
+  </p>
+</section>
+
+<section id="proxying">
+  <hr class="my-6 border-t border-dark-border mt-8" />
+  <h3 class="text-xl font-semibold text-dark-text mt-6 mb-3">Proxying</h3>
+
+  <p class="text-dark-text-secondary mb-4">
+    If you want to proxy a request to another server, you can use
+    <code class="inline">fetch</code>, and just return the response.
+  </p>
+
+  <pre class="language-javascript">
+app.get('/proxy', (req, res) => {
+  let url = "https://google.com"
+  fetch(url)
+    .then(response => response.text())
+    .then(data => res.send(data))
+})
+</pre>
+
+  <p class="text-dark-text-secondary mb-4">
+    However, this doesn't really work so well. if you try to acces the
+    <code class="inline">/proxy</code> route, you will see that the page is
+    missing some elements, and the styling doesn't work.
+  </p>
+  <br />
+  <p class="text-dark-text-secondary mb-4">
+    For a better solution, we can use the
+    <code class="inline">express-http-proxy</code> package.
+  </p>
+
+  <p class="text-dark-text-secondary mb-4">First, install the package:</p>
+
+  <pre class="language-bash">
+npm install express-http-proxy
+</pre>
+
+  <p class="text-dark-text-secondary mb-4">
+    Then, we can use it in our app like this:
+  </p>
+
+  <pre class="language-javascript">
+import proxy from 'express-http-proxy';
+
+app.use('/betterproxy', proxy('https://www.google.com'));
+</pre>
+
+  <p class="text-dark-text-secondary mb-4">
+    Now, if you try to access the
+    <code class="inline">/betterproxy</code> route, you will see that the page
+    is rendered correctly.
+  </p>
+  <br />
+  <p class="text-dark-text-secondary mb-4">
+    I have both endpoints running on this server, so you can see the difference:
+  </p>
+  <a
+    href="/proxy"
+    style="text-decoration: underline; color: #3b82f6; transition: color 0.2s"
+  >
+    /proxy
+  </a>
+  <br />
+  <br />
+  <a
+    href="/betterproxy"
+    style="text-decoration: underline; color: #3b82f6; transition: color 0.2s"
+  >
+    /betterproxy
+  </a>
+</section>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> | NodePortfolio</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="bg-dark-bg text-dark-text min-h-screen flex flex-col">
+    <%- include('../partials/header') %>
+
+    <main class="flex-grow">
+      <div class="container mx-auto px-4 py-8">
+        <% if (typeof tocEnabled !== 'undefined' && tocEnabled) { %>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <!-- Main content -->
+          <div class="lg:col-span-3">
+            <div
+              class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+            >
+              <%- content %>
+            </div>
+          </div>
+
+          <!-- Table of Contents sidebar -->
+          <div class="hidden lg:block">
+            <div class="toc-container sticky top-4">
+              <!-- TOC will be generated automatically by scrollspy.js -->
+            </div>
+          </div>
+        </div>
+        <% } else { %>
+        <!-- Content without TOC -->
+        <div
+          class="bg-dark-surface shadow-md rounded-lg p-6 border border-dark-border"
+        >
+          <%- content %>
+        </div>
+        <% } %>
+      </div>
+    </main>
+
+    <%- include('../partials/footer') %> 
+    
+    <% if (typeof tocEnabled !== 'undefined' && tocEnabled) { %>
+    <!-- JavaScript for scrollspy functionality -->
+    <script src="/js/scrollspy.js"></script>
+    <% } %>
+  </body>
+</html>
