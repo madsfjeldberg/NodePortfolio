@@ -5,12 +5,12 @@ import ejsHighlighterMiddleware from "./middleware/ejsCodeHighlighter.js";
 const app = express();
 const PORT = 8085;
 
+app.set("view engine", "ejs");
+app.set("views", path.resolve("views"));
+
 app.use(express.static(path.resolve("public")));
 app.use("/betterproxy", proxy("https://www.google.com"));
 app.use(ejsHighlighterMiddleware);
-
-app.set("view engine", "ejs");
-app.set("views", path.resolve("views"));
 
 // Helper function to render content within the layout
 app.use((req, res, next) => {

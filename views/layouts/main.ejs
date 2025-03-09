@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %> | NodePortfolio</title>
     <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/toc.css" />
-    <style>
-      /* Additional styles for Shiki code blocks */
-      .shiki {
-        margin: 0;
-        width: 100%;
-        border-radius: 0.375rem;
-        overflow: auto;
-      }
-      section {
-        scroll-margin-top: 2rem;
-      }
-    </style>
   </head>
   <body class="bg-dark-bg text-dark-text min-h-screen flex flex-col">
     <%- include('../partials/header') %>
@@ -53,8 +40,9 @@
       </div>
     </main>
 
-    <%- include('../partials/footer') %> <% if (typeof tocEnabled !==
-    'undefined' && tocEnabled) { %>
+    <%- include('../partials/footer') %> 
+    
+    <% if (typeof tocEnabled !== 'undefined' && tocEnabled) { %>
     <!-- JavaScript for scrollspy functionality -->
     <script src="/js/scrollspy.js"></script>
     <% } %>
