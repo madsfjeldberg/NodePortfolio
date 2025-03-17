@@ -17,3 +17,12 @@ code.inline {
   border-radius: 0.375rem;
   overflow: auto;
 }
+
+.link {
+  color: #3b82f6;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #2563eb;
+}
