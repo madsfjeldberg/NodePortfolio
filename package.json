@@ -15,9 +15,9 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "build:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css && cat ./public/css/main.css >> ./public/css/styles.css",
+    "build:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css",
     "watch:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
-    "dev": "npm run build:css && nodemon --ext js,html,css --watch public --watch app.js --watch middleware --watch utils app.js",
+    "dev": "npm run build:css && nodemon app.js",
     "start": "npm run build:css && node app.js"
   },
   "nodemonConfig": {

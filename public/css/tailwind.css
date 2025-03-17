@@ -1,5 +1,5 @@
-@import "./main.css";
-@import "./toc.css";
+@import "./custom/main.css";
+@import "./custom/toc.css";
 
 @tailwind base;
 @tailwind components;

@@ -105,6 +105,124 @@ x = true; // completely fine
       </p>
   </section>
 
+  <section id="objects">
+    <hr class="my-6 border-t border-dark-border mt-8" />
+    <h3 class="text-xl font-semibold text-dark-text mb-4">Objects</h3>
+
+    <p class="text-dark-text-secondary mb-4">
+      Object in JavaScript are variables, that can contain multiple values and methods.
+      They are typically declared with <code class="inline">const</code>, since we can still change the contents of the object,
+      But not accidentally overwrite it.
+      <br>
+      Objects can defined three different ways:
+    </p>
+    <pre class="language-javascript">
+// Object literal
+{ firstName: "John", lastName: "Doe", age: 50 }
+
+// standard method
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50
+}
+
+// using the "new" keyword
+const person = new Object();
+
+// create new values with dot notation
+person.firstName = "John";
+person.lastName = "Doe";
+person.age = 50;
+      </pre>
+
+    <p class="text-dark-text-secondary mb-4">
+    These values are called <i>properties</i>, and can be accessed in two ways:
+    </p>
+    <pre class="language-javascript">
+person.firstName // "John"
+person["age"] // 50    
+    </pre>
+
+    <p class="text-dark-text-secondary mb-4">
+      Objects can also store functions, although when stored in a object, they are called <i>methods</i>.
+    </p>
+
+    <pre class="language-javascript">
+const person = {
+  firstName: "John",
+  lastName : "Doe",
+  id       : 5566,
+  fullName : function() {
+    return this.firstName + " " + this.lastName;
+  }
+};
+
+person.fullName() // "John Doe"
+    </pre>
+    <p class="text-dark-text-secondary mb-4">
+      Objects can also store other objects as properties.
+      <br>
+      If you're familiar with json, this will seem familiar:
+    </p>
+    <pre class="language-javascript">
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  address: {
+    street: "123 Main St",
+    city: "Boston",
+    state: "MA",
+    zip: "02108"
+  },
+  contacts: {
+    email: "john@example.com",
+    phone: {
+      home: "555-1234",
+      mobile: "555-5678"
+    }
+  }
+};
+
+// Access nested properties using dot notation
+console.log(person.address.city); // "Boston"
+console.log(person.contacts.phone.mobile); // "555-5678"
+    </pre>
+
+    <p class="text-dark-text-secondary mb-4">
+      Sometimes you need to create several of the same object, but with different values. <br>
+      This is where <i>constructors</i> become handy. <br>
+      Lets say we need an easy way to create a lot of new <code class="inline">Employee</code> objects for our company:
+    </p>
+    <pre class="language-javascript">
+// function that creates new Employee objects
+const Employee = (firstName, lastName, age) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.age = age;
+  // lets assume we're only hiring developers, then we can hardcode it like so:
+  this.position = "Developer";
+  // without having to pass it as an argument every time.
+} 
+    </pre> 
+    <p class="text-dark-text-secondary mb-4">
+      Then we can create easily create new Employees like this:
+    </p>
+    <pre class="language-javascript">
+const employee1 = new Employee("John", "Doe", 35);
+const employee2 = new Employee("Anders", "Latif", 30);
+
+// we can still update the values:
+employee2.position = "Senior Developer";
+    </pre>
+
+    <p class="mb-4">
+      NOTE: constructors <i>has</i> to be normal functions, not arrow functions.
+    </p>
+
+  </section>
+
   <section id="functions">
     <hr class="my-6 border-t border-dark-border mt-8" />
     <h3 class="text-xl font-semibold text-dark-text mb-4">Functions</h3>
@@ -146,6 +264,38 @@ myArrowFunction(); // "Hello, world!"
 const myArrowFunction = name => console.log(`Hello, ${name}!`);
 myArrowFunction("John"); // "Hello, John!"
       </pre>
+
+      <section id="callbacks">
+        <hr class="my-6 border-t border-dark-border mt-8" />
+        <h3 class="text-xl font-semibold text-dark-text mb-4">Callbacks</h3>
+        <p class="text-dark-text-secondary mb-4">
+          Callbacks are simply functions that are passed as arguments to other functions.
+          When passing a function as a parameter, it's important to do so <i>without</i> parentheses:
+          <pre class="language-javascript">
+function myLogger(text) {
+  console.log(text);
+}
+
+// for this example, we want to use myLogger as the callback
+function myCalculator(num1, num2, callback) {
+  let sum = num1 + num2;
+  callback(sum);
+}
+
+// should be passed without ()
+myCalculator(1, 1, myLogger) // 2
+
+// if passed with (), myLogger will just be run immediately.
+myCalculator(1, 1, myLogger()) // error
+          </pre>
+      <p class="text-dark-text-secondary mb-4">
+        Callback functions don't seem all that useful in this example,
+        but where they do get useful is in asynchronous functions, where functions has to wait
+        for another to complete.
+      </p>
+      
+
+      </section>
       
       
       
