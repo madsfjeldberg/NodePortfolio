@@ -1,5 +1,5 @@
 services:
-  app:
+  nodeportfolio:
     build:
       context: .
       dockerfile: Dockerfile
