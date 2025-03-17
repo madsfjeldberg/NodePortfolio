@@ -1,13 +1,15 @@
 {
   "restartable": "rs",
   "ignore": [".git", "node_modules/**/node_modules", "public/css/styles.css"],
-  "verbose": true,
+  "verbose": false,
   "watch": [
-    "public/**/*.html",
-    "public/parts/**/*.html",
     "app.js",
     "middleware/**/*.js",
-    "utils/**/*.js"
+    "utils/**/*.js",
+    "views/**/*.ejs",
+    "views/layouts/**/*.ejs",
+    "views/partials/**/*.ejs",
+    "views/pages/**/*.ejs"
   ],
-  "ext": "js,json,html,css"
+  "ext": "js,json,html,css,ejs"
 }

@@ -20,18 +20,6 @@
     "dev": "npm run build:css && nodemon app.js",
     "start": "npm run build:css && node app.js"
   },
-  "nodemonConfig": {
-    "ext": "js,html,css",
-    "watch": [
-      "public/**/*",
-      "app.js",
-      "middleware/**/*",
-      "utils/**/*"
-    ],
-    "ignore": [
-      "public/css/styles.css"
-    ]
-  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "nodemon": "^3.1.0",
