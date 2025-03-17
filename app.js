@@ -2,87 +2,44 @@ import express from "express";
 import path from "path";
 import proxy from "express-http-proxy";
 import ejsHighlighterMiddleware from "./middleware/ejsCodeHighlighter.js";
+import pagesRouter from "./routers/pagesRouter.js";
+import expressEjsLayouts from "express-ejs-layouts";
+
 const app = express();
 const PORT = 8085;
 
+// Set the view engine to ejs
 app.set("view engine", "ejs");
+
+// Set the views directory
 app.set("views", path.resolve("views"));
 
+// Set the layout file
+app.set("layout", "layouts/main");
+
+// Use the static files directory
 app.use(express.static(path.resolve("public")));
+
+// Use the proxy middleware
 app.use("/betterproxy", proxy("https://www.google.com"));
+
+// Use the ejs code highlighter middleware
 app.use(ejsHighlighterMiddleware);
 
-// Helper function to render content within the layout
+// Use the express-ejs-layouts middleware
+app.use(expressEjsLayouts);
+
+// Add current path to the locals object
+// Used to highlight the current page in the navigation bar
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;
-
-  const originalRender = res.render;
-  res.render = function (view, options, callback) {
-    const opts = options || {};
-
-    // Render the view first
-    originalRender.call(this, view, opts, (err, content) => {
-      if (err) return callback ? callback(err) : next(err);
-
-      // Then render the layout with the view content
-      originalRender.call(
-        this,
-        "layouts/main",
-        {
-          ...opts,
-          content: content,
-        },
-        callback
-      );
-    });
-  };
   next();
 });
 
-app.get("/", (req, res) => {
-  res.render("pages/frontpage", {
-    title: "Frontpage | NodePortfolio",
-    tocEnabled: false,
-  });
-});
+// Use the pages router
+app.use(pagesRouter);
 
-app.get("/restapi", (req, res) => {
-  res.render("pages/restapi", {
-    title: "REST API | NodePortfolio",
-    tocEnabled: true,
-  });
-});
-
-app.get("/javascript", (req, res) => {
-  res.render("pages/javascript", {
-    title: "JavaScript | NodePortfolio",
-    tocEnabled: true,
-  });
-});
-
-app.get("/nodejs", (req, res) => {
-  res.render("pages/nodejs", {
-    title: "Node.js | NodePortfolio",
-    tocEnabled: true,
-  });
-});
-
-app.get("/express", (req, res) => {
-  res.render("pages/express", {
-    title: "Express | NodePortfolio",
-    tocEnabled: true,
-  });
-});
-
-app.get("/proxy", (req, res) => {
-  let url = "https://www.google.com";
-  fetch(url)
-    .then((response) => response.text())
-    .then((data) => {
-      res.send(data);
-    });
-});
-
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

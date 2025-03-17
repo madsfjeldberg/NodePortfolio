@@ -678,6 +678,14 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -762,6 +770,10 @@ video {
 
 .min-h-screen {
   min-height: 100vh;
+}
+
+.flex-grow {
+  flex-grow: 1;
 }
 
 .list-disc {

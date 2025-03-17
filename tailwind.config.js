@@ -2,8 +2,10 @@
 export default {
   content: [
     "./public/**/*.{html,js}",
-    "./public/*.html",
-    "./public/parts/**/*.html",
+    "./views/**/*.ejs",
+    "./views/layouts/**/*.ejs",
+    "./views/partials/**/*.ejs",
+    "./views/pages/**/*.ejs",
   ],
   theme: {
     extend: {
