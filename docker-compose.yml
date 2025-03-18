@@ -1,9 +1,9 @@
 services:
-  nodeportfolio:
+  app:
+    container_name: nodeportfolio
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: app
     ports:
       - "8085:8085"
     volumes:
