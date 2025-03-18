@@ -16,7 +16,6 @@
   "main": "app.js",
   "scripts": {
     "build:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css",
-    "watch:css": "node ./node_modules/tailwindcss/lib/cli.js -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
     "dev": "npm run build:css && nodemon app.js",
     "start": "npm run build:css && node app.js"
   },
